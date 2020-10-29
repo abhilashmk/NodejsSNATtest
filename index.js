@@ -11,7 +11,7 @@ var app = express();
 app.get('/', function (req, res) {
  // res.send('Hello abhilash branch World!');
 //var response=superagent.agent(keepaliveAgent).get('https://google.com');
-
+try {
 superagent
 .agent(keepaliveAgent)
 .get('https://google.com')
@@ -19,7 +19,11 @@ superagent
     // Calling the end function will send the request
     console.log(response.status)
   });
-
+}
+catch(e)
+{
+    console.log(e);
+}
 res.send("SNAT keepalive agent test with SUperAgent HTTP client");
  
 });
