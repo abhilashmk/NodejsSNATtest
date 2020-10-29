@@ -1,10 +1,8 @@
 var express = require('express');
 var agent=require('./keepaliveagent.js');
 const superagent = require('superagent');
-var port = 0;
 var app = express();
 
-console.log(typeof agent);
 
 app.get('/', function (req, res) {
  // res.send('Hello abhilash branch World!');
