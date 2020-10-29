@@ -1,5 +1,10 @@
 var express = require('express');
-var agent=require('./keepaliveagent.js');
+//var agent=require('./keepaliveagent.js');
+const {HttpsAgent} = require('agentkeepalive');
+
+const keepaliveAgent = new HttpsAgent({
+    maxSockets: 100
+  });
 const superagent = require('superagent');
 var app = express();
 
@@ -7,7 +12,7 @@ app.get('/', function (req, res) {
  // res.send('Hello abhilash branch World!');
  (async () => {
     try {
-        const res= await superagent.agent(agent).get('https://google.com');
+        const res= await superagent.agent(keepaliveAgent).get('https://google.com');
         console.log(res.status);
         }catch (err) {
         console.error(err);
