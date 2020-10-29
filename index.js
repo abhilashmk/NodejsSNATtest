@@ -10,9 +10,9 @@ const keepaliveAgent = new HttpsAgent({
 var app = express();
 
 const options = {
-    host: 'www.google.com',
+    host: 'www.npmjs.com',
     port: 443,
-    path: '/search?q=nodejs&sugexp=chrome,mod=12&sourceid=chrome&ie=UTF-8',
+    path: '/package/agentkeepalive',
     method: 'GET',
     agent: keepaliveAgent,
   };
