@@ -1,29 +1,34 @@
 var express = require('express');
+const https = require('https');
 //var agent=require('./keepaliveagent.js');
-const Agent = require('agentkeepalive');
+const HttpsAgent = require('agentkeepalive').HttpsAgent;
 
-const keepaliveAgent = new Agent({
+const keepaliveAgent = new HttpsAgent({
     maxSockets: 100
   });
-const superagent = require('superagent');
+//const superagent = require('superagent');
 var app = express();
+
+const options = {
+    host: 'www.google.com',
+    port: 443,
+    path: '/search?q=nodejs&sugexp=chrome,mod=12&sourceid=chrome&ie=UTF-8',
+    method: 'GET',
+    agent: keepaliveAgent,
+  };
 
 app.get('/', function (req, res) {
  // res.send('Hello abhilash branch World!');
 //var response=superagent.agent(keepaliveAgent).get('https://google.com');
-try {
-superagent
-.agent(keepaliveAgent)
-.get('https://google.com')
-.end((err, response) => {
-    // Calling the end function will send the request
-    console.log(response.status)
-  });
-}
-catch(e)
-{
-    console.log(e);
-}
+
+    const req1 = https.request(options, res1 => {
+        console.log('STATUS: ' + res1.statusCode);
+      });
+      req1.on('error', e => {
+        console.log('problem with request: ' + e.message);
+      });
+      req1.end();
+
 res.send("SNAT keepalive agent test with SUperAgent HTTP client");
  
 });
