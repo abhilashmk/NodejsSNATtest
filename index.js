@@ -29,6 +29,8 @@ app.get('/', function (req, res) {
       });
       req1.end();
 
+console.log(keepaliveAgent.getCurrentStatus());
+
 res.send("SNAT keepalive agent test with SUperAgent HTTP client");
  
 });
