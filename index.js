@@ -1,8 +1,8 @@
 var express = require('express');
 //var agent=require('./keepaliveagent.js');
-const {HttpsAgent} = require('agentkeepalive');
+const Agent = require('agentkeepalive');
 
-const keepaliveAgent = new HttpsAgent({
+const keepaliveAgent = new Agent({
     maxSockets: 100
   });
 const superagent = require('superagent');
@@ -10,14 +10,15 @@ var app = express();
 
 app.get('/', function (req, res) {
  // res.send('Hello abhilash branch World!');
- (async () => {
-    try {
-        const res= await superagent.agent(keepaliveAgent).get('https://google.com');
-        console.log(res.status);
-        }catch (err) {
-        console.error(err);
-      }
-    })();
+//var response=superagent.agent(keepaliveAgent).get('https://google.com');
+
+superagent
+.agent(keepaliveAgent)
+.get('https://google.com')
+.end((err, response) => {
+    // Calling the end function will send the request
+    console.log(response.status)
+  });
 
 res.send("SNAT keepalive agent test with SUperAgent HTTP client");
  
